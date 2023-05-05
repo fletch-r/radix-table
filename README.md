@@ -1,4 +1,4 @@
-# Simple Table
+# Radix Table
 
 ## An advanced table that is simple to implement.
 

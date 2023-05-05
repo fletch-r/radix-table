@@ -1,0 +1,39 @@
+@import "@radix-ui/colors/gray.css";
+
+/* reset */
+button {
+  all: unset;
+}
+
+.RadioGroupRoot {
+  display: flex;
+  gap: 10px;
+}
+
+.RadioGroupItem {
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  /* border: 1px solid var(--gray4); */
+}
+.RadioGroupItem:hover {
+  background-color: var(--gray2);
+  cursor: pointer;
+}
+.RadioGroupItem:focus {
+  box-shadow: 0 0 0 2px black;
+}
+
+.RadioGroupIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  fill: var(--gray8);
+}
+[data-state="checked"] .RadioGroupIndicator {
+  fill: var(--gray12);
+}

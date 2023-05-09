@@ -90,14 +90,14 @@ export default function SimpleTable() {
     });
     
     return (
-        <div className="overflow-hidden rounded">
+        <div className="overflow-hidden rounded w-max">
             <div className="flex justify-end w-full p-2">
                 <div>
                     <RowDensity onChange={setSelectedRowDensity} />
                 </div>
             </div>
             <div
-                className="overflow-auto border rounded h-60 resizeContainer w-max"
+                className="overflow-auto border rounded resizeContainer w-max"
                 onScroll={(e) => setHasScrolled({ top: (e.target as HTMLInputElement).scrollTop, left: (e.target as HTMLInputElement).scrollLeft })}
             >
                 <Table.Root className="text-sm border-separate w-max border-spacing-0">

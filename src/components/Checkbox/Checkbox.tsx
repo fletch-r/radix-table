@@ -7,7 +7,7 @@ function Checkbox() {
   return (
     <form>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <RadixCheckbox.Root className="CheckboxRoot" id="c1">
+        <RadixCheckbox.Root className="CheckboxRoot" style={{ boxShadow: 'none' }} id="c1">
           <RadixCheckbox.Indicator className="CheckboxIndicator">
             <CheckIcon />
           </RadixCheckbox.Indicator>

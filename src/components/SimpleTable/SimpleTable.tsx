@@ -48,8 +48,13 @@ export default function SimpleTable() {
             document.removeEventListener('mouseup', mouseUpHandler);
             resizer.classList.remove('resizing');
         };
+
+        const doubleClickHandler = () => {
+            col.style.width = "max-content";
+        };
     
         resizer.addEventListener('mousedown', mouseDownHandler);
+        resizer.addEventListener('dblclick', doubleClickHandler);
     };
 
     React.useEffect(() => {

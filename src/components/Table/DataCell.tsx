@@ -1,12 +1,12 @@
-import React from "react";
+import React, { TdHTMLAttributes } from "react";
 
-type DataProps = {
+type DataCellProps = TdHTMLAttributes<HTMLTableCellElement> &  {
     children: React.ReactNode;
     className?: string;
     density: 'compact' | 'default' | 'comfortable';
 }
 
-export default function Data({ children, className, density }: DataProps) {
+export default function DataCell({ children, className, density, ...props }: DataCellProps) {
     const [height, setHeight] = React.useState('py-2');
 
     React.useEffect(() => {
@@ -23,5 +23,9 @@ export default function Data({ children, className, density }: DataProps) {
         }
     }, [density]);
 
-    return <td className={`border-b ${className} ${height}`}>{children}</td>;
+    return (
+        <td className={`border-b ${className} ${height}`} {...props}>
+            {children}
+        </td>
+    );
 }

@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { ThHTMLAttributes } from 'react';
 
-type HeaderProps = {
+type HeaderCellProps = ThHTMLAttributes<HTMLTableCellElement> & {
     children: React.ReactNode;
     className?: string;
-    id?: string;
     density: 'compact' | 'default' | 'comfortable';
-}
+};
 
-export default function Header({ children, className, id, density }: HeaderProps) {
+export default function HeaderCell({ children, className, density, ...props }: HeaderCellProps) {
     const [height, setHeight] = React.useState('py-2');
 
     React.useEffect(() => {
@@ -24,5 +23,9 @@ export default function Header({ children, className, id, density }: HeaderProps
         }
     }, [density]);
 
-    return <th id={id} className={`border-b ${className} ${height}`}>{children}</th>;
+    return (
+        <th className={`border-b ${className} ${height}`} {...props}>
+            {children}
+        </th>
+    );
 }

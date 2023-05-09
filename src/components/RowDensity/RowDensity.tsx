@@ -1,10 +1,10 @@
 import React from 'react';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import './styles.css';
-import ThinRowDensityIcon from '../../../../icons/ThinRowDensityIcon';
-import MediumRowDensityIcon from '../../../../icons/MediumRowDensityIcon';
-import ThickRowDensityIcon from '../../../../icons/ThickRowDensityIcon';
-import Tooltip from '../Tooltip';
+import WideDensityIcon from '../../icons/WideDensityIcon';
+import DefaultDensityIcon from '../../icons/DefaultDensityIcon';
+import NarrowDensityIcon from '../../icons/NarrowDensityIcon';
+import Tooltip from '../Tooltip/Tooltip';
 
 type RowDensityProps = {
     onChange: (value: 'compact' | 'default' | 'comfortable') => void;
@@ -16,22 +16,22 @@ export default function RowDensity({ onChange }: RowDensityProps) {
             <RadioGroup.Root className="RadioGroupRoot" defaultValue="default" aria-label="View density" onValueChange={onChange}>
                 <Tooltip tip="Compact">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <RadioGroup.Item className="RadioGroupItem" value="compact" id="r1">
-                                <ThinRowDensityIcon className="RadioGroupIndicator" />
-                            </RadioGroup.Item>
+                        <RadioGroup.Item className="RadioGroupItem" value="compact" id="r1">
+                            <NarrowDensityIcon className="RadioGroupIndicator" />
+                        </RadioGroup.Item>
                     </div>
                 </Tooltip>
                 <Tooltip tip="Standard">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <RadioGroup.Item className="RadioGroupItem" value="default" id="r2">
-                            <MediumRowDensityIcon className="RadioGroupIndicator" />
+                            <DefaultDensityIcon className="RadioGroupIndicator" />
                         </RadioGroup.Item>
                     </div>
                 </Tooltip>
                 <Tooltip tip="Comfortable">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <RadioGroup.Item className="RadioGroupItem" value="comfortable" id="r3">
-                            <ThickRowDensityIcon className="RadioGroupIndicator" />
+                            <WideDensityIcon className="RadioGroupIndicator" />
                         </RadioGroup.Item>
                     </div>
                 </Tooltip>

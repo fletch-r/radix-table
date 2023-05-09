@@ -1,14 +1,9 @@
 import './SimpleTable.css';
 
 import React from "react";
-import Checkbox from "./components/Checkbox";
-import Header from "./components/table/Header";
-import Data from "./components/table/Data";
-import RowDensity from './components/RowDensity';
-
-function DefaultSkeleton() {
-    return <div className="w-[100px] h-[10px] bg-slate-500 animate-none rounded-md" />;
-}
+import Checkbox from "../Checkbox/Checkbox";
+import * as Table from '../Table';
+import RowDensity from '../RowDensity';
 
 /**
  *  Table with advance features
@@ -59,11 +54,11 @@ export default function SimpleTable() {
 
     React.useEffect(() => {
         // Query the table
-        const table = document.getElementById('resizeMe')!;
+        // const table = document.getElementById('resizeMe-0')!;
         const th = document.getElementById('thSize')!;
 
         // Query all headers
-        const cols = table.querySelectorAll('th');
+        const cols = document.querySelectorAll('th');
 
         // Loop over them
         [].forEach.call(cols, (col: any) => {
@@ -95,52 +90,60 @@ export default function SimpleTable() {
     });
     
     return (
-        <div className="rounded overflow-hidden">
-            <div className="w-full p-2 flex justify-end">
+        <div className="overflow-hidden rounded">
+            <div className="flex justify-end w-full p-2">
                 <div>
                     <RowDensity onChange={setSelectedRowDensity} />
                 </div>
             </div>
             <div
-                className="h-60 overflow-auto border rounded resizeContainer"
+                className="overflow-auto border rounded h-60 resizeContainer w-max"
                 onScroll={(e) => setHasScrolled({ top: (e.target as HTMLInputElement).scrollTop, left: (e.target as HTMLInputElement).scrollLeft })}
             >
-                <table id="resizeMe" className="border-separate w-max border-spacing-0 text-sm">
-                    <thead className={`sticky top-0 bg-white z-20 ${hasScrolled.top > 0 ? 'shadow-md' : ''}`}>
-                        <tr className="divide-x">
-                            <Header density={selectedRowDensity} id="thSize" className="sticky left-0 z-10 bg-white">
-                                    <Checkbox />
-                            </Header>
+                <Table.Root className="text-sm border-separate w-max border-spacing-0">
+                    <Table.Header className={`sticky top-0 bg-white z-20 ${hasScrolled.top > 0 ? 'shadow-md' : ''}`}>
+                        <Table.Row className="divide-x">
+                            <Table.HeaderCell density={selectedRowDensity} id="thSize" className="sticky left-0 z-10 bg-white">
+                                <Checkbox />
+                            </Table.HeaderCell>
                             {Object.keys(example_rows[0]).map((str: string, index: number) => index === 0 ? (
-                                <Header density={selectedRowDensity} className={`sticky z-10 bg-white left-9 ${hasScrolled.left > 0 ? 'shadow-[10px_0px_6px_-1px_rgb(0,0,0,0.1),_5px_0px_4px_-2px_rgb(0,0,0,0.1)]' : ''}`}>
+                                <Table.HeaderCell
+                                    key={str}
+                                    density={selectedRowDensity}
+                                    className={`sticky z-10 bg-white left-9 ${hasScrolled.left > 0 ? 'shadow-[10px_0px_6px_-1px_rgb(0,0,0,0.1),_5px_0px_4px_-2px_rgb(0,0,0,0.1)]' : ''}`}
+                                >
                                     {str}
-                                </Header>
+                                </Table.HeaderCell>
                             ) : (
-                                <Header density={selectedRowDensity}>
+                                <Table.HeaderCell key={str} density={selectedRowDensity}>
                                     {str}
-                                </Header>
+                                </Table.HeaderCell>
                             ))}
-                        </tr>
-                    </thead>
-                    <tbody>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
                         {example_rows.map((obj, index) => (
-                            <tr className="even:bg-neutral-100">
-                                <Data density={selectedRowDensity} className={`sticky left-0 z-10 ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-100'} w-9`}>
+                            <Table.Row key={index} className="even:bg-neutral-100">
+                                <Table.DataCell density={selectedRowDensity} className={`sticky left-0 z-10 ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-100'} w-9`}>
                                     <Checkbox />
-                                </Data>
+                                </Table.DataCell>
                                 {Object.values(obj).map((value: any, i: number) => i === 0 ? (
-                                    <Data density={selectedRowDensity} className={`sticky left-9 z-10 ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-100'} ${hasScrolled.left > 0 ? 'shadow-[10px_0px_6px_-1px_rgb(0,0,0,0.1),_5px_0px_4px_-2px_rgb(0,0,0,0.1)]' : ''}`}>
+                                    <Table.DataCell
+                                        key={value}
+                                        density={selectedRowDensity}
+                                        className={`sticky left-9 z-10 ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-100'} ${hasScrolled.left > 0 ? 'shadow-[10px_0px_6px_-1px_rgb(0,0,0,0.1),_5px_0px_4px_-2px_rgb(0,0,0,0.1)]' : ''}`}
+                                    >
                                         {value}
-                                    </Data>
+                                    </Table.DataCell>
                                 ) : (
-                                    <Data density={selectedRowDensity}>
+                                    <Table.DataCell key={value} density={selectedRowDensity}>
                                         {value}
-                                    </Data>
+                                    </Table.DataCell>
                                 ))}
-                            </tr>
+                            </Table.Row>
                         ))}
-                    </tbody>
-                </table>
+                    </Table.Body>
+                </Table.Root>
             </div>
         </div>
     );

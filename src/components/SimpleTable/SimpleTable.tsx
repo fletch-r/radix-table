@@ -95,8 +95,8 @@ export default function SimpleTable() {
     });
     
     return (
-        <div className="overflow-hidden rounded w-max">
-            <div className="flex justify-end w-full p-2">
+        <div className="p-4 overflow-hidden border rounded-lg w-max">
+            <div className="flex justify-end w-full mb-2">
                 <div>
                     <RowDensity onChange={setSelectedRowDensity} />
                 </div>
@@ -105,8 +105,8 @@ export default function SimpleTable() {
                 className="overflow-auto border rounded resizeContainer w-max"
                 onScroll={(e) => setHasScrolled({ top: (e.target as HTMLInputElement).scrollTop, left: (e.target as HTMLInputElement).scrollLeft })}
             >
-                <Table.Root className="text-sm border-separate w-max border-spacing-0">
-                    <Table.Header className={`sticky top-0 bg-white z-20 ${hasScrolled.top > 0 ? 'shadow-md' : ''}`}>
+                <Table.Root>
+                    <Table.Header className={hasScrolled.top > 0 ? 'shadow-md' : ''}>
                         <Table.Row className="divide-x">
                             <Table.HeaderCell density={selectedRowDensity} id="thSize" className="sticky left-0 z-10 bg-white">
                                 <Checkbox />

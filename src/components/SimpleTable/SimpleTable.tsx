@@ -4,6 +4,7 @@ import React from "react";
 import Checkbox from "../Checkbox/Checkbox";
 import * as Table from '../Table';
 import RowDensity from '../RowDensity';
+import Select from "../Select";
 
 /**
  *  Table with advance features
@@ -11,6 +12,8 @@ import RowDensity from '../RowDensity';
 export default function SimpleTable() {
     const [hasScrolled, setHasScrolled] = React.useState<{ top: number; left: number; }>({ top: 0, left: 0 });
     const [selectedRowDensity, setSelectedRowDensity] = React.useState<'compact' | 'default' | 'comfortable'>('default');
+
+    const [rowsPerPage, setRowsPerPage] = React.useState("10");
 
     const createResizableColumn = (col: any, resizer: any) => {
         // Track the current position of mouse
@@ -82,7 +85,7 @@ export default function SimpleTable() {
         });
     }, []);
 
-    const example_rows = Array(10).fill({
+    const example_rows = Array(Number(rowsPerPage)).fill({
         Invoice: 'INV-0001',
         Created: 'Aug 12, 2018',
         Status: 'Outstanding',
@@ -102,7 +105,7 @@ export default function SimpleTable() {
                 </div>
             </div>
             <div
-                className="overflow-auto border rounded resizeContainer w-max"
+                className="mb-4 overflow-auto border rounded resizeContainer w-max"
                 onScroll={(e) => setHasScrolled({ top: (e.target as HTMLInputElement).scrollTop, left: (e.target as HTMLInputElement).scrollLeft })}
             >
                 <Table.Root>
@@ -149,6 +152,10 @@ export default function SimpleTable() {
                         ))}
                     </Table.Body>
                 </Table.Root>
+            </div>
+            <div className="flex items-center gap-4">
+                <p className="text-sm">Rows per page:</p>
+                <Select onChange={(value: string) => setRowsPerPage(value)} />
             </div>
         </div>
     );

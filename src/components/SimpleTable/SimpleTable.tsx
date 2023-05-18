@@ -13,7 +13,7 @@ export default function SimpleTable() {
     const [hasScrolled, setHasScrolled] = React.useState<{ top: number; left: number; }>({ top: 0, left: 0 });
     const [selectedRowDensity, setSelectedRowDensity] = React.useState<'compact' | 'default' | 'comfortable'>('default');
 
-    const [rowsPerPage, setRowsPerPage] = React.useState("10");
+    const [rowsPerPage, setRowsPerPage] = React.useState("5");
 
     const createResizableColumn = (col: any, resizer: any) => {
         // Track the current position of mouse
